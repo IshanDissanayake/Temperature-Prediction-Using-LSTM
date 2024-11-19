@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>WeatherForecast</title>
+</head>
+<body>
+    <h1>WeatherForecast</h1>
+    <div class="container">
+        <form id="weatherForm" method="POST" action="/">
+            {% for day in range(1, 6) %}
+              <h4>Day {{ day }} {% if day == 1 %}(Oldest){% elif day == 5 %}(Latest){% endif %}</h4>
+              <label for="temp{{ day }}">Temperature (°C):</label>
+              <input type="number" name="temp{{ day }}" id="temp{{ day }}" step="0.01" required>
+              
+              <label for="humidity{{ day }}">Humidity (%):</label>
+              <input type="number" name="humidity{{ day }}" id="humidity{{ day }}" step="0.01" required>
+              
+              <label for="wind_speed{{ day }}">Wind Speed (km/h):</label>
+              <input type="number" name="wind_speed{{ day }}" id="wind_speed{{ day }}" step="0.01" required>
+            {% endfor %}
+            <button type="submit">Predict</button>
+        </form>  
+        <div>
+          <h3>Temperature Tomorrow: {{ prediction }} (°C)</h3>
+        </div>        
+    </div>
+    
+</body>
+</html>
